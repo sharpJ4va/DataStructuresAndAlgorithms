@@ -26,7 +26,7 @@ public class ListNode {
     //违背面向对象的设计要求，但是更为精简，在算法题目中应用广泛
     public int val;
     public ListNode next;
-    ListNode(int x){
+    public ListNode(int x){
         val = x;
         next = null;
     }
