@@ -1,10 +1,11 @@
 package com.sharp.listnode;
 
 /**
- * 合并两个有序链表
+ * 合并链表
  */
-public class MergeTwoLists {
+public class MergeLists {
     /**
+     * 合并两个有序链表
      * 新建一个链表，然后分别遍历两个链表吗，每次都选最小的结点拼接到新链表上
      * @param l1
      * @param l2
@@ -57,4 +58,48 @@ public class MergeTwoLists {
 //    res.next = list1 == null ? list2 : list1;
 //    return newList.next;
     //----------------------------------------------------
+
+    /**
+     * 合并K个有序链表
+     * 先将前两个合并，之后再将后面的逐步合并起来
+     * @param lists
+     * @return
+     */
+    public ListNode mergeKLists(ListNode[] lists){
+        ListNode res = null;
+        for(ListNode list : lists){
+            res = mergeTwoLists(res,list);
+        }
+        return res;
+    }
+
+    /**
+     * 合并两个链表
+     * 将 list1 中下标从 a 到 b 的全部节点都删除，并将list2 接在被删除节点的位置
+     *  方法：按部就班，找到链表1保留部分的尾结点和链表2的尾结点，将两链表链接起来。
+     * @param list1
+     * @param a
+     * @param b
+     * @param list2
+     * @return
+     */
+    public ListNode mergeInBetween(ListNode list1, int a, int b, ListNode list2) {
+        ListNode pre1 = list1, post1 = list1, post2 = list2;
+        int i = 0 , j = 0;
+        while(pre1 != null && post1 != null && j <= b){
+            if(i != a - 1){
+                pre1 = pre1.next;
+                i++;
+            }
+            post1 = post1.next;
+            j++;
+        }
+
+        while(post2.next != null){
+            post2 = post2.next;
+        }
+        post2.next = post1;
+        pre1.next = list2;
+        return list1;
+    }
 }
