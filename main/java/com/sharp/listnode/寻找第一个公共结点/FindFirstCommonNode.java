@@ -1,4 +1,6 @@
-package com.sharp.listnode;
+package com.sharp.listnode.寻找第一个公共结点;
+
+import com.sharp.listnode.单链表基础.ListNode;
 
 /**
  *  两个链表的第一个公共节点

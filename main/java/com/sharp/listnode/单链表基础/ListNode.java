@@ -1,4 +1,4 @@
-package com.sharp.listnode;
+package com.sharp.listnode.单链表基础;
 
 /**
  * 单链表

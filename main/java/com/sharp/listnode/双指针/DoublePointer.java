@@ -1,4 +1,6 @@
-package com.sharp.listnode;
+package com.sharp.listnode.双指针;
+
+import com.sharp.listnode.单链表基础.ListNode;
 
 /**
  * 双指针

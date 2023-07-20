@@ -1,4 +1,6 @@
-package com.sharp.listnode;
+package com.sharp.listnode.删除链表结点;
+
+import com.sharp.listnode.单链表基础.ListNode;
 
 /**
  * 删除链表元素

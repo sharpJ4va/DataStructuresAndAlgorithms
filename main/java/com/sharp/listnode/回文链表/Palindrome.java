@@ -1,4 +1,6 @@
-package com.sharp.listnode;
+package com.sharp.listnode.回文链表;
+
+import com.sharp.listnode.单链表基础.ListNode;
 
 import java.util.Deque;
 import java.util.LinkedList;

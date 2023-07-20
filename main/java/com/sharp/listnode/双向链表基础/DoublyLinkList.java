@@ -1,4 +1,4 @@
-package com.sharp.listnode;
+package com.sharp.listnode.双向链表基础;
 
 /**
  * 双向链表
