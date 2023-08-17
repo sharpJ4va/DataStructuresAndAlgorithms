@@ -20,7 +20,7 @@ public class ThreeSum {
         int n = nums.length;
         Arrays.sort(nums);
         // 枚举 a
-        List<List<Integer>> ans = new ArrayList<List<Integer>>();
+        List<List<Integer>> ans = new ArrayList<>();
         for(int first = 0 ; first < n ; ++first){
             // 需要和上一次枚举的数不相同
             if(first > 0 && nums[first] == nums[first-1]){
@@ -45,7 +45,7 @@ public class ThreeSum {
                     break;
                 }
                 if(nums[second]+nums[third] == target){
-                    List<Integer> list = new ArrayList<Integer>();
+                    List<Integer> list = new ArrayList<>();
                     list.add(nums[first]);
                     list.add(nums[second]);
                     list.add(nums[third]);
