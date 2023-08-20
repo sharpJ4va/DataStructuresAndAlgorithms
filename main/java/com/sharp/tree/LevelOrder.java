@@ -130,4 +130,68 @@ public class LevelOrder {
         }
         return res;
     }
+
+    /**
+     * LeetCode429 给定一个 N 叉树，返回其节点值的层序遍历。（即从左到右，逐层遍历）。
+     * 树的序列化输入是用层序遍历，每组子节点都由 null 值分隔。
+     * LeetCode102的扩展，很简单的广度优先，与二叉树的层序遍历基本一样，借助队列即可实现。
+     *
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> levelOrder(Node root) {
+        if(root == null){
+            return new ArrayList<>();
+        }
+        List<List<Integer>> res = new ArrayList<>();
+        Deque<Node> queue = new LinkedList<>();
+        queue.add(root);
+        while(!queue.isEmpty()){
+            List<Integer> tmp = new ArrayList<>();
+            Deque<Node> q = new LinkedList<>();
+            while(!queue.isEmpty()){
+                Node n = queue.pollFirst();
+                tmp.add(n.val);
+                for(Node node : n.children){
+                    if(node != null){
+                        q.add(node);
+                    }
+                }
+            }
+            queue = q;
+            res.add(tmp);
+        }
+        return res;
+    }
+
+    /**
+     * LeetCode515 题目要求：给定一棵二叉树的根节点 root ，请找出该二叉树中每一层的最大值。
+     * 方法 ：在得到一层之后使用一个变量来记录当前得到的最大值
+     * @param root
+     * @return
+     */
+    public List<Integer> largestValues(TreeNode root) {
+        if(root == null){
+            return new ArrayList<>();
+        }
+        List<Integer> res = new ArrayList<>();
+        Deque<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            int intMax = Integer.MIN_VALUE;
+            for(int i = 0; i < size; i++){
+                TreeNode t = queue.remove();
+                intMax = Math.max(t.val,intMax); //重点代码
+                if(t.left!=null){
+                    queue.add(t.left);
+                }
+                if(t.right!=null){
+                    queue.add(t.right);
+                }
+            }
+            res.add(intMax);
+        }
+        return res;
+    }
 }
