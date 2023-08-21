@@ -52,6 +52,7 @@ public class LevelOrder {
     }
 
     /**
+     * 层序遍历-自底向上
      * LeetCode 107.给定一个二叉树，返回其节点值 自底向上 的层序遍历。
      * （即按从叶子节点所在层到根节点所在的层，逐层从左向右遍历）。
      * 只需将 自上而下 的结果反过来 即得到自底向上
@@ -91,6 +92,7 @@ public class LevelOrder {
     }
 
     /**
+     * 二叉树的锯齿形层序遍历
      * LeetCode103 题，要求是：给定一个二叉树，返回其节点值的锯齿形层序遍历。
      * （即先从左往右，再从右往左进行下一层遍历，以此类推，层与层之间交替进行）。
      * 利用「双端队列」的数据结构来维护当前层节点值输出的顺序。
@@ -106,7 +108,7 @@ public class LevelOrder {
         Deque<TreeNode> deque = new LinkedList<>();
         boolean isOrderLeft = true; //标记层数
         deque.add(root);
-        while (deque.size() != 0) {
+        while (!deque.isEmpty()) {
             int size = deque.size();
             Deque<Integer> tmp = new LinkedList<>();
             for (int i = 0; i < size; i++) {
@@ -132,6 +134,7 @@ public class LevelOrder {
     }
 
     /**
+     * N叉树的层序遍历
      * LeetCode429 给定一个 N 叉树，返回其节点值的层序遍历。（即从左到右，逐层遍历）。
      * 树的序列化输入是用层序遍历，每组子节点都由 null 值分隔。
      * LeetCode102的扩展，很简单的广度优先，与二叉树的层序遍历基本一样，借助队列即可实现。
@@ -165,6 +168,7 @@ public class LevelOrder {
     }
 
     /**
+     * 在每个树行中找最大值
      * LeetCode515 题目要求：给定一棵二叉树的根节点 root ，请找出该二叉树中每一层的最大值。
      * 方法 ：在得到一层之后使用一个变量来记录当前得到的最大值
      * @param root
@@ -193,5 +197,97 @@ public class LevelOrder {
             res.add(intMax);
         }
         return res;
+    }
+
+    /**
+     * 在每个树行中找平均值
+     * LeetCode637 要求给定一个非空二叉树, 返回一个由每层节点平均值组成的数组。
+     * 方法 ： 每层都先将元素保存下来，最后求平均
+     * @param root
+     * @return
+     */
+    public List<Double> averageOfLevels(TreeNode root) {
+        if(root == null){
+            return new ArrayList<>();
+        }
+        List<Double> res = new ArrayList<>();
+        Deque<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            double num = 0;
+            for(int i = 0 ; i < size ; i++){
+                TreeNode t = queue.remove();
+                num += t.val;
+                if(t.left!=null){
+                    queue.add(t.left);
+                }
+                if(t.right!=null){
+                    queue.add(t.right);
+                }
+            }
+            res.add(num/size);
+        }
+        return res;
+    }
+
+    /**
+     *  二叉树的右视图
+     * LeetCode199 给定一个二叉树的根节点 root，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值。
+     * 方法 ：利用 BFS 进行层次遍历，记录下每层的最后一个元素
+     * @param root
+     * @return
+     */
+    public List<Integer> rightSideView(TreeNode root) {
+        if(root == null){
+            return new ArrayList<>();
+        }
+        List<Integer> res = new ArrayList<>();
+        Deque<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            for(int i = 0; i < size ; i++){
+                TreeNode t = queue.remove();
+                if(t.left !=null){
+                    queue.add(t.left);
+                }
+                if(t.right!=null){
+                    queue.add(t.right);
+                }
+                if(i == size - 1){
+                    res.add(t.val);
+                }
+            }
+        }
+        return res;
+    }
+
+    /**
+     * 二叉树的最底层最左边
+     * LeetCode513 给定一个二叉树的 根节点root，请找出该二叉树的 最底层 最左边 节点的值。
+     * 方法 ：将放入队列的顺序反转，即先放 右子节点，后放 左子节点。遍历到的最后一个节点就是最底层最左边的节点。
+     * @param root
+     * @return
+     */
+    public int findBottomLeftValue(TreeNode root) {
+        if(root.left == null && root.right == null){
+            return root.val;
+        }
+        Deque<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        TreeNode t = new TreeNode(-99);
+        while(!queue.isEmpty()){
+            t = queue.remove();
+            //先放右
+            if(t.right != null){
+                queue.add(t.right);
+            }
+            //后放左
+            if(t.left != null){
+                queue.add(t.left);
+            }
+        }
+        return t.val;
     }
 }
