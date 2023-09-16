@@ -1,4 +1,6 @@
-package com.sharp.tree;
+package com.sharp.tree.二叉树遍历_前中后序;
+
+import com.sharp.tree.二叉树基础.TreeNode;
 
 import java.util.*;
 
